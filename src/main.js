@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
+import router from './Router'
 import './plugins/element.js'
 
 // 导入全局字体图标
@@ -13,6 +13,12 @@ import './assets/css/global.css'
 import axios from 'axios'
 // 配置请求的baseURL
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
+// axios 请求拦截器
+axios.interceptors.request.use(config => {
+  // 为请求对象添加 token 验证的 Authorization 字段
+  config.headers.Authorization = window.sessionStorage.getItem('token')
+  return config
+})
 
 // 将 axios 挂载到 vue 的 http 上
 Vue.prototype.$http = axios
