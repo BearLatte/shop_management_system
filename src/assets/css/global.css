@@ -26,3 +26,8 @@ body,
 .el-pagination {
     margin-top: 15px;
 }
+
+/* 解决 element-ui 级联菜单显示沾满屏幕的 bug */
+.el-cascader-menu {
+    height: 300px;
+}

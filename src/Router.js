@@ -19,6 +19,15 @@ import Rights from './components/power/Rights.vue'
 // 导入角色列表组件
 import Roles from './components/power/Roles.vue'
 
+// 商品列表导航组件
+import GoodsList from './components/goods/GoodsList.vue'
+
+// 商品分类参数组件
+import Parameters from './components/goods/Parameters.vue'
+
+// 商品分类组件
+import Categories from './components/goods/Categories.vue'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -33,7 +42,10 @@ const router = new Router({
         { path: '/welcome', component: Welcome },
         { path: '/users', component: Users },
         { path: '/rights', component: Rights },
-        { path: '/roles', component: Roles }
+        { path: '/roles', component: Roles },
+        { path: '/goods', component: GoodsList },
+        { path: '/params', component: Parameters },
+        { path: '/categories', component: Categories }
       ]
     }
   ]

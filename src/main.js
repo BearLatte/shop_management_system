@@ -9,6 +9,9 @@ import './assets/fonts/iconfont.css'
 // 导入全局样式表
 import './assets/css/global.css'
 
+// 导入第三方 UI 组件
+import TreeTable from 'vue-table-with-tree-grid'
+
 // 全局网络请求包
 import axios from 'axios'
 // 配置请求的baseURL
@@ -24,6 +27,9 @@ axios.interceptors.request.use(config => {
 Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
+
+// 注册第三方 UI 组件
+Vue.component('tree-table', TreeTable)
 
 new Vue({
   router,
