@@ -21,7 +21,6 @@
                 <!-- 展开列 -->
                 <el-table-column type="expand">
                     <template v-slot="scope">
-                        <!-- :class="['bdbottom', i1 === 0 ? 'bdtop' : '', 'pd40']" -->
                         <el-row :class="[i1 === 0 ? '' : 'bdtop', 'vcenter', 'pd40']" v-for="(item1, i1) in scope.row.children" :key="item1.id">
                             <!-- 渲染一级权限 -->
                             <el-col :span="5">
