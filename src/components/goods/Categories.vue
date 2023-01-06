@@ -306,10 +306,10 @@ export default {
 
 <style lang="less" scoped>
 .treeTable {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 
 .el-cascader {
-    width: 100%;
+  width: 100%;
 }
 </style>
