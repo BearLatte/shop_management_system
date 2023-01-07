@@ -28,6 +28,12 @@ import Parameters from './components/goods/Parameters.vue'
 // 商品分类组件
 import Categories from './components/goods/Categories.vue'
 
+// 导入添加商品组件
+import AddGoods from './components/goods/AddGoods.vue'
+
+// 导入商品编辑组件
+import EditGoods from './components/goods/EditGoods.vue'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -45,7 +51,9 @@ const router = new Router({
         { path: '/roles', component: Roles },
         { path: '/goods', component: GoodsList },
         { path: '/params', component: Parameters },
-        { path: '/categories', component: Categories }
+        { path: '/categories', component: Categories },
+        { path: '/goods/add', component: AddGoods },
+        { path: '/goods/edit/:goodsId', component: EditGoods, props: true }
       ]
     }
   ]
