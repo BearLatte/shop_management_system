@@ -35,7 +35,8 @@
                     </template>
                 </el-table-column>
                 <el-table-column label="操作">
-                    <template v-slot="{row: order}">
+                    <!-- v-slot="{row: order}" 此处具体操作需要作用域插槽 -->
+                    <template>
                         <el-tooltip content="修改地址" placement="top" effect="dark" :enterable="false">
                             <el-button type="primary" icon="el-icon-edit" size="mini" @click="showEditAddressDialog"></el-button>
                         </el-tooltip>

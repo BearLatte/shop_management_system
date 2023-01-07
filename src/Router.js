@@ -37,6 +37,9 @@ import EditGoods from './components/goods/EditGoods.vue'
 // 导入订单组件
 import Order from './components/order/Order.vue'
 
+// 导入数据报表组件
+import Report from './components/report/Report.vue'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -58,6 +61,7 @@ const router = new Router({
         { path: '/goods/add', component: AddGoods },
         { path: '/goods/edit/:goodsId', component: EditGoods, props: true },
         { path: '/orders', component: Order },
+        { path: '/reports', component: Report }
       ]
     }
   ]
