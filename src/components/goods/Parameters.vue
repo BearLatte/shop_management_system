@@ -148,9 +148,7 @@ export default {
       },
       // 添加表单的验证规则对象
       addParamsFormRules: {
-        attr_name: [
-          { required: true, message: '请输入参数/属性名称', trigger: 'blur' }
-        ]
+        attr_name: [{ required: true, message: '请输入参数/属性名称', trigger: 'blur' }]
       },
       // 控制修改对话框的显示与隐藏
       editParamsDialogVisible: false,
@@ -158,9 +156,7 @@ export default {
       editParamsForm: {},
       // 修改参数的验证对象
       editParamsFormRules: {
-        attr_name: [
-          { required: true, message: '请输入参数/属性名称', trigger: 'blur' }
-        ]
+        attr_name: [{ required: true, message: '请输入参数/属性名称', trigger: 'blur' }]
       }
     }
   },
@@ -196,10 +192,7 @@ export default {
       }
 
       // 选中的是三级分类,发起网络请求获取分类数据
-      const { data: response } = await this.$http.get(
-        `categories/${this.cateId}/attributes`,
-        { params: { sel: this.activeName } }
-      )
+      const { data: response } = await this.$http.get(`categories/${this.cateId}/attributes`, { params: { sel: this.activeName } })
 
       if (response.meta.status !== 200) {
         return this.$message.error(response.meta.msg)
@@ -234,13 +227,10 @@ export default {
     addParams () {
       this.$refs.addParamsFormRef.validate(async (valid) => {
         if (!valid) return
-        const { data: response } = await this.$http.post(
-          `categories/${this.cateId}/attributes`,
-          {
-            attr_name: this.addParamsForm.attr_name,
-            attr_sel: this.activeName
-          }
-        )
+        const { data: response } = await this.$http.post(`categories/${this.cateId}/attributes`, {
+          attr_name: this.addParamsForm.attr_name,
+          attr_sel: this.activeName
+        })
         if (response.meta.status !== 201) {
           return this.$message.error(response.meta.msg)
         }
@@ -252,10 +242,7 @@ export default {
     // 点击按钮，显示修改参数的对话框
     async showEditParamsDialog (attrId) {
       // 先获取到要修改的参数对象
-      const { data: response } = await this.$http.get(
-        `categories/${this.cateId}/attributes/${attrId}`,
-        { params: { attr_sel: this.activeName } }
-      )
+      const { data: response } = await this.$http.get(`categories/${this.cateId}/attributes/${attrId}`, { params: { attr_sel: this.activeName } })
       if (response.meta.status !== 200) {
         return this.$message.error(response.meta.msg)
       }
@@ -273,13 +260,10 @@ export default {
       this.$refs.editParamsFormmRef.validate(async (valid) => {
         if (!valid) return
         // 发起网络请求提交修改
-        const { data: response } = await this.$http.put(
-          `categories/${this.cateId}/attributes/${this.editParamsForm.attr_id}`,
-          {
-            attr_name: this.editParamsForm.attr_name,
-            attr_sel: this.activeName
-          }
-        )
+        const { data: response } = await this.$http.put(`categories/${this.cateId}/attributes/${this.editParamsForm.attr_id}`, {
+          attr_name: this.editParamsForm.attr_name,
+          attr_sel: this.activeName
+        })
         if (response.meta.status !== 200) {
           return this.$message.error(response.meta.msg)
         }
@@ -290,24 +274,18 @@ export default {
     },
     // 通过指定 id 删除对应的参数
     async removeParamById (attrId) {
-      const confirResult = await this.$confirm(
-        '此操作将永久删除该参数，是否继续？',
-        '提示',
-        {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }
-      ).catch((err) => err)
+      const confirResult = await this.$confirm('此操作将永久删除该参数，是否继续？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).catch((err) => err)
 
       if (confirResult !== 'confirm') {
         return this.$message.info('取消了删除操作!')
       }
 
       // 发起删除请求
-      const { data: response } = await this.$http.delete(
-        `categories/${this.cateId}/attributes/${attrId}`
-      )
+      const { data: response } = await this.$http.delete(`categories/${this.cateId}/attributes/${attrId}`)
 
       if (response.meta.status !== 200) {
         return this.$message.error(response.meta.msg)
@@ -331,14 +309,11 @@ export default {
     // 将对 attr_vals 的操作，保存到数据库
     async saveAttrValues (param) {
       // 发起网络请求，保存本次操作
-      const { data: response } = await this.$http.put(
-        `categories/${this.cateId}/attributes/${param.attr_id}`,
-        {
-          attr_name: param.attr_name,
-          attr_sel: param.attr_sel,
-          attr_vals: param.attr_vals.join(' ')
-        }
-      )
+      const { data: response } = await this.$http.put(`categories/${this.cateId}/attributes/${param.attr_id}`, {
+        attr_name: param.attr_name,
+        attr_sel: param.attr_sel,
+        attr_vals: param.attr_vals.join(' ')
+      })
       if (response.meta.status !== 200) {
         return this.$message.error(response.meta.msg)
       }

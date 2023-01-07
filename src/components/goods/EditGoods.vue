@@ -7,7 +7,7 @@
             <el-breadcrumb-item>商品编辑</el-breadcrumb-item>
         </el-breadcrumb>
         <el-card>
-          111111
+            111111
         </el-card>
     </div>
 </template>

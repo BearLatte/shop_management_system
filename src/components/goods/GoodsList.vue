@@ -46,7 +46,6 @@
     </div>
 </template>
 
-
 <script>
 export default {
   data () {
@@ -90,16 +89,12 @@ export default {
     },
     // 根据商品 id 删除指定的商品
     async removeGoodsById (goodsId) {
-      const confirmResult = await this.$confirm(
-        '此操作将永久删除选中的商品，是否继续？',
-        '提示',
-        {
-          closeOnClickModal: false,
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }
-      ).catch((err) => err)
+      const confirmResult = await this.$confirm('此操作将永久删除选中的商品，是否继续？', '提示', {
+        closeOnClickModal: false,
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).catch((err) => err)
 
       if (confirmResult !== 'confirm') {
         return this.$message.info('取消了删除操作!')

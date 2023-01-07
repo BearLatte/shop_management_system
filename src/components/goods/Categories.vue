@@ -214,8 +214,7 @@ export default {
       // 反之就说明没有选中父级分类
       if (this.selectedKeys.length > 0) {
         // 父级分类的 id
-        this.addCateForm.cat_pid =
-                    this.selectedKeys[this.selectedKeys.length - 1]
+        this.addCateForm.cat_pid = this.selectedKeys[this.selectedKeys.length - 1]
         this.addCateForm.cat_level = this.selectedKeys.length
       } else {
         this.addCateForm.cat_pid = 0
@@ -226,10 +225,7 @@ export default {
     addCate () {
       this.$refs.addCateFormRef.validate(async (valid) => {
         if (!valid) return
-        const { data: response } = await this.$http.post(
-          'categories',
-          this.addCateForm
-        )
+        const { data: response } = await this.$http.post('categories', this.addCateForm)
 
         if (response.meta.status !== 201) {
           return this.$message.error(response.meta.msg)
@@ -248,24 +244,18 @@ export default {
     },
     // 根据 id 删除特定的分类
     async removeCateById (id) {
-      const confirmResult = await this.$confirm(
-        '此操作将永久删除该分类, 是否继续?',
-        '提示',
-        {
-          confirmButtonText: '确认',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }
-      ).catch((err) => err)
+      const confirmResult = await this.$confirm('此操作将永久删除该分类, 是否继续?', '提示', {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).catch((err) => err)
 
       if (confirmResult !== 'confirm') {
         return this.$message.info('取消了删除操作!')
       }
 
       // 发起网络请求
-      const { data: response } = await this.$http.delete(
-        'categories/' + id
-      )
+      const { data: response } = await this.$http.delete('categories/' + id)
       if (response.meta.status !== 200) {
         return this.$message.error(response.meta.msg)
       }
@@ -285,12 +275,9 @@ export default {
     editCateAction () {
       this.$refs.editCateRef.validate(async (valid) => {
         if (!valid) return
-        const { data: response } = await this.$http.put(
-          'categories/' + this.editCate.cat_id,
-          {
-            cat_name: this.editCate.cat_name
-          }
-        )
+        const { data: response } = await this.$http.put('categories/' + this.editCate.cat_id, {
+          cat_name: this.editCate.cat_name
+        })
 
         if (response.meta.status !== 200) {
           return this.$message.error(response.meta.msg)

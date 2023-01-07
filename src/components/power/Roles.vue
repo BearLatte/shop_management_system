@@ -17,7 +17,7 @@
             </el-row>
 
             <!-- 角色列表区域 -->
-            <el-table :data="rolesList" border stripe>
+            <el-table :data="rolesList" border stripe row-key="id">
                 <!-- 展开列 -->
                 <el-table-column type="expand">
                     <template v-slot="scope">
@@ -192,23 +192,17 @@ export default {
     // 根据 id 删除对应的权限
     async removeRightById (role, rightId) {
       // 弹框提示用户是否要删除
-      const confirmResult = await this.$confirm(
-        '是否删除当前选中权限？',
-        '提示',
-        {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }
-      ).catch((err) => err)
+      const confirmResult = await this.$confirm('是否删除当前选中权限？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).catch((err) => err)
 
       if (confirmResult !== 'confirm') {
         return this.$message.info('取消了当前删除操作!')
       }
 
-      const { data: response } = await this.$http.delete(
-                `roles/${role.id}/rights/${rightId}`
-      )
+      const { data: response } = await this.$http.delete(`roles/${role.id}/rights/${rightId}`)
 
       if (response.meta.status !== 200) {
         return this.$message.error(response.meta.msg)
@@ -247,15 +241,9 @@ export default {
     },
     // 点击为角色分配权限
     async allotRights () {
-      const keys = [
-        ...this.$refs.treeRef.getCheckedKeys(),
-        ...this.$refs.treeRef.getHalfCheckedKeys()
-      ]
+      const keys = [...this.$refs.treeRef.getCheckedKeys(), ...this.$refs.treeRef.getHalfCheckedKeys()]
       const idStr = keys.join(',')
-      const { data: response } = await this.$http.post(
-                `roles/${this.roleId}/rights`,
-                { rids: idStr }
-      )
+      const { data: response } = await this.$http.post(`roles/${this.roleId}/rights`, { rids: idStr })
 
       if (response.meta.status !== 200) {
         return this.$message.error(response.meta.msg)
@@ -273,10 +261,7 @@ export default {
       this.$refs.addRoleRef.validate(async (valid) => {
         if (!valid) return
 
-        const { data: response } = await this.$http.post(
-          'roles',
-          this.addRoleForm
-        )
+        const { data: response } = await this.$http.post('roles', this.addRoleForm)
 
         if (response.meta.status !== 201) {
           return this.$message.error(response.meta.msg)
@@ -289,15 +274,11 @@ export default {
     },
     // 监听删除按钮的事件
     async removeRoleById (id) {
-      const confirmResult = await this.$confirm(
-        '此操作将永久删除角色，是否确定?',
-        '提示',
-        {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }
-      ).catch((err) => err)
+      const confirmResult = await this.$confirm('此操作将永久删除角色，是否确定?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).catch((err) => err)
 
       if (confirmResult !== 'confirm') {
         return this.$message.info('取消了删除操作!')
@@ -333,13 +314,10 @@ export default {
         if (!valid) return
 
         // 发起网络请求修改角色
-        const { data: response } = await this.$http.put(
-          'roles/' + this.editRoleForm.roleId,
-          {
-            roleName: this.editRoleForm.roleName,
-            roleDesc: this.editRoleForm.roleDesc
-          }
-        )
+        const { data: response } = await this.$http.put('roles/' + this.editRoleForm.roleId, {
+          roleName: this.editRoleForm.roleName,
+          roleDesc: this.editRoleForm.roleDesc
+        })
 
         if (response.meta.status !== 200) {
           return this.$message.error(response.meta.msg)

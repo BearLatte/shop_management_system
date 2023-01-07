@@ -100,21 +100,11 @@ export default {
       },
       // 添加商品表单的验证对象
       addGoodsFormRules: {
-        goods_name: [
-          { required: true, message: '请输入商品名称', trigger: 'blur' }
-        ],
-        goods_price: [
-          { required: true, message: '请输入商品价格', trigger: 'blur' }
-        ],
-        goods_weight: [
-          { required: true, message: '请输入商品重量', trigger: 'blur' }
-        ],
-        goods_number: [
-          { required: true, message: '请输入商品数量', trigger: 'blur' }
-        ],
-        goods_cat: [
-          { required: true, message: '请选择商品分类', trigger: 'blur' }
-        ]
+        goods_name: [{ required: true, message: '请输入商品名称', trigger: 'blur' }],
+        goods_price: [{ required: true, message: '请输入商品价格', trigger: 'blur' }],
+        goods_weight: [{ required: true, message: '请输入商品重量', trigger: 'blur' }],
+        goods_number: [{ required: true, message: '请输入商品数量', trigger: 'blur' }],
+        goods_cat: [{ required: true, message: '请选择商品分类', trigger: 'blur' }]
       },
       // 商品分类列表
       cateList: [],
@@ -195,24 +185,17 @@ export default {
     async tabClicked () {
       // 证明访问的是动态参数面板
       if (this.activeIndex === '1') {
-        const { data: response } = await this.$http.get(
-          `categories/${this.cateId}/attributes`,
-          { params: { sel: 'many' } }
-        )
+        const { data: response } = await this.$http.get(`categories/${this.cateId}/attributes`, { params: { sel: 'many' } })
         if (response.meta.status !== 200) {
           return this.$message.error(response.meta.msg)
         }
 
         response.data.forEach((item) => {
-          item.attr_vals =
-            item.attr_vals.length === 0 ? [] : item.attr_vals.split(' ')
+          item.attr_vals = item.attr_vals.length === 0 ? [] : item.attr_vals.split(' ')
         })
         this.manyTableData = response.data
       } else if (this.activeIndex === '2') {
-        const { data: response } = await this.$http.get(
-          `categories/${this.cateId}/attributes`,
-          { params: { sel: 'only' } }
-        )
+        const { data: response } = await this.$http.get(`categories/${this.cateId}/attributes`, { params: { sel: 'only' } })
 
         if (response.meta.status !== 200) {
           return this.$message.error(response.meta.msg)
@@ -281,9 +264,7 @@ export default {
   },
   computed: {
     cateId () {
-      return this.addGoodsForm.goods_cat.length === 3
-        ? this.addGoodsForm.goods_cat[2]
-        : null
+      return this.addGoodsForm.goods_cat.length === 3 ? this.addGoodsForm.goods_cat[2] : null
     }
   }
 }
